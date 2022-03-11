@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: erpnext
+spec:
+  generators:
+  - list:
+      elements:
+      - cluster: in-cluster
+        url: https://kubernetes.default.svc
+      #- cluster: nodejs
+       # url: https://vc-8gqvedrvabptwavwjwq4.apps.aws-mumbai-eks.klusternetes.com
+  template:
+    metadata:
+      name: erpnext
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/sai8465/ERPNext.git
+        targetRevision: HEAD
+        path: erpnext-3.2.30/erpnext
+      destination:
+        server: '{{url}}'
+        namespace: default
