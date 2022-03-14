@@ -38,15 +38,15 @@ spec:
               containerPort: 80
               protocol: TCP
           livenessProbe:
-            initialDelaySeconds: {{ .Values.initialDelaySeconds }}
+            initialDelaySeconds: 5
             httpGet:
-              path: /live
-              port: 3000
+              path: /
+              port: http
           readinessProbe:
-            initialDelaySeconds: {{ .Values.initialDelaySeconds }}
+            initialDelaySeconds: 5
             httpGet:
-              path: /ready
-              port: 3000
+              path: /
+              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
