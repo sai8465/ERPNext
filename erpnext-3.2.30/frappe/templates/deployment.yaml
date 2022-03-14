@@ -38,15 +38,23 @@ spec:
               containerPort: 80
               protocol: TCP
           livenessProbe:
-            initialDelaySeconds: 300
             httpGet:
               path: /
-              port: http
+              scheme: HTTP  
+              port: 3000
+            initialDelaySeconds: 120
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 10    
           readinessProbe:
-            initialDelaySeconds: 300
             httpGet:
               path: /
-              port: http
+              scheme: HTTP  
+              port: 3000
+            initialDelaySeconds: 120
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 10     
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
